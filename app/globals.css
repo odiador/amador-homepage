@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --modal-color: rgb(255, 255, 255, 0.65);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+    --modal-color: rgb(10,10,10,0.65);
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.blur-effect {
+  background: var(--modal-color);
+  -webkit-backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
+}
+
+.glitch {
+   position: relative;
+   z-index: 1;
+}
+
+.glitch:before,
+.glitch:after {
+   display: block;
+   content: attr(data-glitch);
+   position: absolute;
+   top: 0;
+   left: 0;
+   opacity: 0.8;
+}
+
+.glitch:before {
+   animation: glitch-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+   color: #0ff;
+   z-index: -1;
+}
+
+.glitch:after {
+   animation: glitch-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
+   color: #ff00ff;
+   z-index: -2;
+}
+
+@keyframes glitch-color {
+   0% {
+      transform: translate(0);
+   }
+
+   20% {
+      transform: translate(-2px, 2px);
+   }
+
+   40% {
+      transform: translate(-2px, -2px);
+   }
+
+   60% {
+      transform: translate(2px, 2px);
+   }
+
+   80% {
+      transform: translate(2px, -2px);
+   }
+
+   to {
+      transform: translate(0);
+   }
+}
