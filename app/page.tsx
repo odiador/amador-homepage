@@ -33,7 +33,7 @@ export default function Home() {
       {/* <MacbookScroll /> */}
       <FloatingDockDemo />
       <Squares speed={0.5} id="home" className="px-8 py-4 relative w-8/12 text-6xl flex flex-col" direction="diagonal">
-        <h1 className="">I'm</h1>
+        <h1 className="">I&apos;m</h1>
         <h1 className="font-extrabold w-96">Juan Manuel <strong className="text-teal-200">Amador</strong > Roa</h1>
         <TypingAnimation className="text-teal-200 pt-4 text-3xl font-light tracking-widest" strings={["Programming Lover", "Lover of tech", "Lover of Innovative Solutions", "Lover of Creative Code"]} />
       </Squares>
