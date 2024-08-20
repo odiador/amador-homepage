@@ -75,7 +75,7 @@ const FloatingDockMobile = ({
                     else scrollToTop();
                   }}
                   key={item.title}
-                  className="h-10 w-10 rounded-full bg-gray-50 dark:bg-neutral-900 flex items-center justify-center"
+                  className="h-10 w-10 rounded-full bg-gray-200 dark:bg-neutral-900 flex items-center justify-center"
                 >
                   <div className="h-4 w-4">{item.icon}</div>
                 </div>
@@ -86,7 +86,7 @@ const FloatingDockMobile = ({
       </AnimatePresence>
       <button
         onClick={() => setOpen(!open)}
-        className="h-10 w-10 rounded-full bg-gray-50 dark:bg-neutral-800 flex items-center justify-center"
+        className="h-10 w-10 rounded-full bg-gray-200 dark:bg-neutral-800 flex items-center justify-center"
       >
         <IconLayoutNavbarCollapse className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />
       </button>
@@ -125,7 +125,7 @@ const FloatingDockDesktop = ({
       }}
       onMouseLeave={() => mouseY.set(Infinity)}
       className={cn(
-        "my-auto hidden md:flex w-16 gap-4 flex-col items-center rounded-2xl bg-gray-50 dark:bg-neutral-900 py-4",
+        "my-auto hidden md:flex w-16 gap-4 flex-col items-center rounded-2xl bg-gray-200 dark:bg-neutral-900 py-4",
         className
       )}
       ref={ref2}
@@ -223,7 +223,7 @@ function IconContainer({
       style={{ width, height, x }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="aspect-square rounded-full bg-gray-200 dark:bg-neutral-800 flex items-center justify-center relative transition-transform duration-75"
+      className="aspect-square rounded-full bg-gray-300 dark:bg-neutral-800 flex items-center justify-center relative transition-transform duration-75"
     >
       <AnimatePresence>
         {hovered && (

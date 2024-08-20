@@ -8,33 +8,45 @@ import { useEffect, useRef } from "react";
 export default function NavBar() {
   const ref = useRef(null);
   useEffect(() => {
-    inView(document.getElementById("navbar")!, () => {
+    inView(document.getElementById("home")!, () => {
       const navClone = document.getElementById("navbar-clone");
       navClone?.classList.remove("go-top");
       navClone?.classList.add("animate-end");
-      
+
       return (leaveInfo) => {
         navClone?.classList.add("go-top");
         navClone?.classList.remove("animate-end");
       }
     });
   }, [])
-  return <nav id="navbar" ref={ref} className="flex w-full justify-center items-center ">
-    {iconos()}
+  return <nav id="navbar" ref={ref} className="flex w-full justify-end items-center ">
+    <div className="flex w-fit">
+      {
+        allIcons.map(ico => {
+          return (
+            <Link key={ico.name} id={ico.name} className={"size-10 flex items-center justify-center rounded-md hover:scale-125 hover:text-[#53c1f0] hover:dark:text-teal-200 transition-all"} href={ico.href}>
+              {ico.icon}
+            </Link>
+          );
+        })
+      }
+    </div>
   </nav>;
 }
+export { allIcons };
 
-export function iconos() {
-  return <div className="flex w-fit items-center">
-    <div className="size-10 flex items-center justify-center rounded-md">
-      <IconBrandLinkedin />
-    </div>
-    <div className="size-10 flex items-center justify-center rounded-md">
-      <IconBrandGithubFilled />
-    </div>
-    <Link className="size-10 flex items-center justify-center rounded-md group" href={""}>
-      <IconBrandInstagram className="transition-transform group-hover:scale-125" />
-    </Link>
-  </div>;
-}
-
+const allIcons = [
+  {
+    icon: <IconBrandLinkedin />,
+    href: "https://www.linkedin.com/in/juana-amador-guerra-martinez/",
+    name: "Linkedin",
+  }, {
+    icon: <IconBrandGithubFilled />,
+    href: "https://www.linkedin.com/in/juana-amador-guerra-martinez/",
+    name: "GitHub",
+  }, {
+    icon: <IconBrandInstagram />,
+    href: "https://www.linkedin.com/in/juana-amador-guerra-martinez/",
+    name: "Instagram",
+  },
+]

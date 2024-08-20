@@ -13,14 +13,14 @@ export function FloatingDockDemo() {
     {
       title: "Home",
       icon: (
-        <IconHomeFilled className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+        <IconHomeFilled className="h-full w-full text-neutral-900 dark:text-neutral-300" />
       ),
       href: "#home",
     },
     {
       title: "Featured Projects",
       icon: (
-        <IconStarFilled className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+        <IconStarFilled className="h-full w-full text-neutral-900 dark:text-neutral-300" />
       ),
       href: "#",
     },
@@ -28,7 +28,7 @@ export function FloatingDockDemo() {
     {
       title: "Projects",
       icon: (
-        <IconFolderFilled className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+        <IconFolderFilled className="h-full w-full text-neutral-900 dark:text-neutral-300" />
       ),
       href: "#projects",
     },
@@ -36,14 +36,14 @@ export function FloatingDockDemo() {
     {
       title: "Contact me",
       icon: (
-        <IconPhoneFilled className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+        <IconPhoneFilled className="h-full w-full text-neutral-900 dark:text-neutral-300" />
       ),
       href: "#",
     },
     {
       title: "Info",
       icon: (
-        <IconInfoCircleFilled className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+        <IconInfoCircleFilled className="h-full w-full text-neutral-900 dark:text-neutral-300" />
       ),
       href: "#",
       modalContent: <div className="flex flex-col items-center">

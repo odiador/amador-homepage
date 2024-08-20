@@ -1,4 +1,5 @@
 "use client";
+import { useTheme } from 'next-themes';
 import { useRef, useEffect, useState } from 'react';
 
 const Squares = ({
@@ -18,6 +19,8 @@ const Squares = ({
     id?: string;
     className?: string;
 }) => {
+    const { resolvedTheme } = useTheme();
+
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const requestRef = useRef<number | null>(null);
     const squareSize = 50; // Square size set to 50px
@@ -50,7 +53,10 @@ const Squares = ({
                         const squareY = (y * squareSize) + (gridOffset.current.y % squareSize);
 
                         // Set the border color
-                        ctx.strokeStyle = borderColor;
+                        if (resolvedTheme == 'light')
+                            ctx.strokeStyle = '#000000';
+                        else
+                            ctx.strokeStyle = borderColor;
                         ctx.strokeRect(squareX, squareY, squareSize, squareSize);
                     }
                 }
@@ -65,8 +71,8 @@ const Squares = ({
                 Math.sqrt(Math.pow(canvas.width, 2) + Math.pow(canvas.height, 2)) / 2
             );
 
-            gradient.addColorStop(0, 'rgba(17, 17, 17, 0)'); // Transparent center
-            gradient.addColorStop(1, '#111111'); // Black edge
+            gradient.addColorStop(0, resolvedTheme == 'light' ? '#ffffff00' : '#11111100'); // Transparent center
+            gradient.addColorStop(1, resolvedTheme == 'light' ? '#ffffff' : '#111111'); // Black edge
 
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -96,7 +102,6 @@ const Squares = ({
 
             if (Math.abs(gridOffset.current.x) > squareSize) gridOffset.current.x = 0;
             if (Math.abs(gridOffset.current.y) > squareSize) gridOffset.current.y = 0;
-
             drawGrid();
             requestRef.current = requestAnimationFrame(updateAnimation);
         };
@@ -110,7 +115,7 @@ const Squares = ({
                 cancelAnimationFrame(requestRef.current);
             }
         };
-    }, [direction, speed, borderColor, hoverFillColor, hoveredSquare]);
+    }, [direction, speed, borderColor, hoverFillColor, hoveredSquare, resolvedTheme]);
 
     return <div className={className} id={id} >
         {children}
