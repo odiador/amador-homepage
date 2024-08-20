@@ -42,9 +42,11 @@ export function Modal({ children }: { children: ReactNode }) {
 export const ModalTrigger = ({
   children,
   className,
+  onClick
 }: {
   children: ReactNode;
   className?: string;
+  onClick?: () => void;
 }) => {
   const { setOpen } = useModal();
   return (
@@ -53,7 +55,7 @@ export const ModalTrigger = ({
         "px-4 py-2 rounded-md text-black dark:text-white text-center relative overflow-hidden",
         className
       )}
-      onClick={() => setOpen(true)}
+      onClick={() => { setOpen(true); if (onClick) onClick(); }}
     >
       {children}
     </button>
@@ -63,9 +65,11 @@ export const ModalTrigger = ({
 export const ModalBody = ({
   children,
   className,
+  onClose,
 }: {
   children: ReactNode;
   className?: string;
+  onClose?: () => void;
 }) => {
   const { open } = useModal();
 
@@ -79,7 +83,7 @@ export const ModalBody = ({
 
   const modalRef = useRef(null);
   const { setOpen } = useModal();
-  useOutsideClick(modalRef, () => setOpen(false));
+  useOutsideClick(modalRef, () => { setOpen(false); if (onClose) onClose(); });
 
   return (
     <AnimatePresence>
@@ -129,7 +133,7 @@ export const ModalBody = ({
               damping: 15,
             }}
           >
-            <CloseIcon />
+            <CloseIcon onClose={onClose} />
             {children}
           </motion.div>
         </motion.div>
@@ -190,11 +194,11 @@ const Overlay = ({ className }: { className?: string }) => {
   );
 };
 
-const CloseIcon = () => {
+const CloseIcon = ({ onClose }: { onClose?: () => void }) => {
   const { setOpen } = useModal();
   return (
     <button
-      onClick={() => setOpen(false)}
+      onClick={() => { setOpen(false); if (onClose) onClose(); }}
       className="absolute top-4 right-4 group"
     >
       <svg
