@@ -6,6 +6,7 @@ import Squares from "@/components/ui/squares";
 import { TypingAnimation } from "@/components/ui/typewriter";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { ThemeProvider } from "next-themes";
+import Hero from "@/components/ui/hero";
 
 export default function Home() {
   const { scrollY } = useScroll();
@@ -21,15 +22,8 @@ export default function Home() {
     <ThemeProvider>
       <main className="relative flex min-h-screen p-16 pt-28 gap-2 flex-col items-center justify-center">
         <NavBarHeader />
-        {/* <FollowingPointerDemo /> */}
-        {/* <MacbookScroll /> */}
         <FloatingDockDemo />
-        <Squares speed={0.5} id="home" className="px-8 py-4 relative w-8/12 text-6xl flex flex-col" direction="diagonal">
-          <h1 className="">I&apos;m</h1>
-          <h1 className="font-extrabold w-96">Juan Manuel <strong className="text-[#5373f0] dark:text-teal-200">Amador</strong > Roa</h1>
-          <TypingAnimation className="text-[#5373f0] dark:text-teal-200 pt-4 text-3xl font-light tracking-widest" strings={["Programming Lover", "Lover of tech", "Lover of Innovative Solutions", "Lover of Creative Code"]} />
-          <ContactIcons />
-        </Squares>
+        <Hero />
         <svg
 
           id="down-arrow" className="my-32 opacity-0 animate-pulse" width={64} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

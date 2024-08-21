@@ -1,25 +1,8 @@
-"use client";
-import { IconBrandLinkedin, IconBrandGithubFilled, IconBrandInstagram } from "@tabler/icons-react";
-import { motion, useScroll } from "framer-motion";
-import { inView } from "framer-motion/dom";
+import { IconBrandGithubFilled, IconBrandInstagram, IconBrandLinkedin } from "@tabler/icons-react";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
 
 export default function ContactIcons() {
-  const ref = useRef(null);
-  useEffect(() => {
-    inView(document.getElementById("home")!, () => {
-      const navClone = document.getElementById("navbar-header");
-      navClone?.classList.remove("go-top");
-      navClone?.classList.add("animate-end");
-
-      return (leaveInfo) => {
-        navClone?.classList.add("go-top");
-        navClone?.classList.remove("animate-end");
-      }
-    });
-  }, [])
-  return <nav id="navbar" ref={ref} className="flex w-full justify-end items-center ">
+  return <nav id="navbar" className="flex w-full justify-end items-center ">
     <div className="flex w-fit">
       {
         allIcons.map(ico => {

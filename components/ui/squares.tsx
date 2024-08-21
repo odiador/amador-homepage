@@ -10,6 +10,7 @@ const Squares = ({
     children,
     className,
     id,
+    squaresRef,
 }: {
     direction?: 'diagonal' | 'right' | 'left' | 'up' | 'down',
     borderColor?: string;
@@ -18,6 +19,7 @@ const Squares = ({
     children: React.ReactNode;
     id?: string;
     className?: string;
+    squaresRef: any;
 }) => {
     const { resolvedTheme } = useTheme();
 
@@ -117,7 +119,7 @@ const Squares = ({
         };
     }, [direction, speed, borderColor, hoverFillColor, hoveredSquare, resolvedTheme]);
 
-    return <div className={className} id={id} >
+    return <div ref={squaresRef} className={className} id={id} >
         {children}
         <canvas ref={canvasRef} className='absolute top-0 left-0 w-full -z-20 h-full opacity-30 border-none '>
         </canvas>
