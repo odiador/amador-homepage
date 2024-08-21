@@ -15,16 +15,14 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import Link from "next/link";
-import { ReactNode, useRef, useState } from "react";
-import { Modal, ModalBody, ModalContent, ModalTrigger } from "./animated-modal";
+import { useRef, useState } from "react";
 
 export const FloatingDock = ({
   items,
   desktopClassName,
   mobileClassName,
 }: {
-  items: { title: string; icon: React.ReactNode; href: string, modalContent?: ReactNode }[];
+  items: { title: string; icon: React.ReactNode; href?: string }[];
   desktopClassName?: string;
   mobileClassName?: string;
 }) => {
@@ -40,7 +38,7 @@ const FloatingDockMobile = ({
   items,
   className,
 }: {
-  items: { title: string; icon: React.ReactNode; href: string }[];
+  items: { title: string; icon: React.ReactNode; href?: string }[];
   className?: string;
 }) => {
   const [open, setOpen] = useState(false);
@@ -71,7 +69,7 @@ const FloatingDockMobile = ({
               >
                 <div
                   onClick={() => {
-                    if (item.href !== '#home') scrolltoHash(item.href);
+                    if (item.href) scrolltoHash(item.href);
                     else scrollToTop();
                   }}
                   key={item.title}
@@ -94,9 +92,15 @@ const FloatingDockMobile = ({
   );
 };
 const scrolltoHash = function (element_id: string) {
-  const element = document.getElementById(window.location.hash.substring(1));
+  const element = document.getElementById(element_id.substring(1));
   if (element) {
-    element.scrollIntoView({ behavior: 'smooth' });
+    var elementPosition = element.getBoundingClientRect().top;
+    var offsetPosition = elementPosition + window.scrollY - 90;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth"
+    });
   }
 }
 const isBrowser = () => typeof window !== 'undefined'; //The approach recommended by Next.js
@@ -111,7 +115,7 @@ const FloatingDockDesktop = ({
   items,
   className,
 }: {
-  items: { title: string; icon: React.ReactNode; href: string; modalContent?: ReactNode }[];
+  items: { title: string; icon: React.ReactNode; href?: string; }[];
   className?: string;
 }) => {
   let mouseY = useMotionValue(Infinity);
@@ -143,14 +147,12 @@ function IconContainer({
   title,
   icon,
   href,
-  modalContent,
 }: {
   mouseX: MotionValue;
   mouseY: MotionValue;
   title: string;
   icon: React.ReactNode;
-  href: string;
-  modalContent?: ReactNode;
+  href?: string;
 }) {
   let ref = useRef<HTMLDivElement>(null);
 
@@ -201,19 +203,14 @@ function IconContainer({
   const [hovered, setHovered] = useState(false);
 
   return (
-    modalContent ?
-      <Modal>
-        <ModalBody onClose={() => { setHovered(false); mouseY.set(Infinity); }}>
-          <ModalContent>{modalContent}</ModalContent>
-
-        </ModalBody>
-        <ModalTrigger onClick={() => { mouseY.set(Infinity) }} className="overflow-visible">
-          {boton(true)}
-        </ModalTrigger>
-      </Modal> :
-      <Link href={href}>
-        {boton(false)}
-      </Link>
+    <div onClick={() => {
+      if (href)
+        scrolltoHash(href);
+      else
+        scrollToTop();
+    }}>
+      {boton(false)}
+    </div>
 
   );
 

@@ -5,11 +5,11 @@ import { inView } from "framer-motion/dom";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
-export default function NavBar() {
+export default function ContactIcons() {
   const ref = useRef(null);
   useEffect(() => {
     inView(document.getElementById("home")!, () => {
-      const navClone = document.getElementById("navbar-clone");
+      const navClone = document.getElementById("navbar-header");
       navClone?.classList.remove("go-top");
       navClone?.classList.add("animate-end");
 
@@ -38,15 +38,15 @@ export { allIcons };
 const allIcons = [
   {
     icon: <IconBrandLinkedin />,
-    href: "https://www.linkedin.com/in/juana-amador-guerra-martinez/",
+    href: "https://www.linkedin.com/in/jamadorr/",
     name: "Linkedin",
   }, {
     icon: <IconBrandGithubFilled />,
-    href: "https://www.linkedin.com/in/juana-amador-guerra-martinez/",
+    href: "https://github.com/odiador/",
     name: "GitHub",
   }, {
     icon: <IconBrandInstagram />,
-    href: "https://www.linkedin.com/in/juana-amador-guerra-martinez/",
+    href: "https://www.instagram.com/amadour.r/",
     name: "Instagram",
   },
 ]
