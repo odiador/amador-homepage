@@ -1,12 +1,9 @@
 "use client";
 import { FloatingDockDemo } from "@/components/ui/Dock";
-import ContactIcons from "@/components/ui/navBar";
 import NavBarHeader from "@/components/ui/HeaderNavBar";
-import Squares from "@/components/ui/squares";
-import { TypingAnimation } from "@/components/ui/typewriter";
-import { motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { ThemeProvider } from "next-themes";
 import Hero from "@/components/ui/hero";
+import { useMotionValueEvent, useScroll } from "framer-motion";
+import { ThemeProvider } from "next-themes";
 
 export default function Home() {
   const { scrollY } = useScroll();
@@ -20,10 +17,10 @@ export default function Home() {
   })
   return (
     <ThemeProvider>
-      <main className="relative flex min-h-screen p-16 pt-28 gap-2 flex-col items-center justify-center">
+      <main className="relative flex min-h-screen md:p-16 p-4 pt-28 gap-2 flex-col items-center justify-center">
         <NavBarHeader />
-        <FloatingDockDemo />
         <Hero />
+        <FloatingDockDemo />
         <svg
 
           id="down-arrow" className="my-32 opacity-0 animate-pulse" width={64} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

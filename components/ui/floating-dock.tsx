@@ -15,6 +15,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
+import { off } from "process";
 import { useRef, useState } from "react";
 
 export const FloatingDock = ({
@@ -43,24 +44,24 @@ const FloatingDockMobile = ({
 }) => {
   const [open, setOpen] = useState(false);
   return (
-    <div className={cn("relative block md:hidden", className)}>
+    <div className={cn("relative md:hidden flex items-center w-full", className)}>
       <AnimatePresence>
         {open && (
           <motion.div
             layoutId="nav"
-            className="absolute top-full inset-x-0 flex flex-col gap-2"
+            className="pt-4 absolute top-full flex flex-col gap-2"
           >
             {items.map((item, idx) => (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: -10 }}
                 animate={{
                   opacity: 1,
                   y: 0,
                 }}
                 exit={{
                   opacity: 0,
-                  y: 10,
+                  y: -10,
                   transition: {
                     delay: (items.length - 1 - idx) * 0.05,
                   },
@@ -73,9 +74,9 @@ const FloatingDockMobile = ({
                     else scrollToTop();
                   }}
                   key={item.title}
-                  className="h-10 w-10 rounded-full bg-gray-200 dark:bg-neutral-900 flex items-center justify-center"
+                  className="h-16 w-16 rounded-full bg-gray-200 dark:bg-neutral-900 flex items-center justify-center -z-1"
                 >
-                  <div className="h-4 w-4">{item.icon}</div>
+                  <div className="h-8 w-8">{item.icon}</div>
                 </div>
               </motion.div>
             ))}
@@ -84,10 +85,16 @@ const FloatingDockMobile = ({
       </AnimatePresence>
       <button
         onClick={() => setOpen(!open)}
-        className="h-10 w-10 rounded-full bg-gray-200 dark:bg-neutral-800 flex items-center justify-center"
+        className="flex-shrink-0 h-16 w-16 rounded-full bg-gray-200 dark:bg-neutral-800 flex items-center justify-center z-1"
       >
-        <IconLayoutNavbarCollapse className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />
+        <IconLayoutNavbarCollapse className="h-8 w-8 text-neutral-500 dark:text-neutral-400" />
       </button>
+      <div className="text-nowrap">
+        Juan Manuel Amador Roa
+      </div>
+      <div className="w-full text-end justify-self-end">
+        Hola
+      </div>
     </div>
   );
 };
@@ -95,7 +102,10 @@ const scrolltoHash = function (element_id: string) {
   const element = document.getElementById(element_id.substring(1));
   if (element) {
     var elementPosition = element.getBoundingClientRect().top;
-    var offsetPosition = elementPosition + window.scrollY - 90;
+    let offsetPosition = elementPosition + window.scrollY - 20;
+    const width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+    if (width >= 768)
+      offsetPosition -= 50;
 
     window.scrollTo({
       top: offsetPosition,

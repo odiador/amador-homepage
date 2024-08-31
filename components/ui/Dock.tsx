@@ -6,9 +6,7 @@ import {
   IconHomeFilled,
   IconInfoCircleFilled,
   IconPhone,
-  IconPhoneRinging,
-  IconStarFilled,
-  IconTimeDuration0
+  IconStarFilled
 } from "@tabler/icons-react";
 
 export function FloatingDockDemo() {
@@ -63,7 +61,7 @@ export function FloatingDockDemo() {
 
   ];
   return (
-    <div className="flex items-start md:items-center h-full fixed top-0 left-0">
+    <div className="flex backdrop-blur-[10px] bg-white/10 dark:bg-black/10 md:dark:bg-transparent md:bg-transparent items-start md:items-center w-full p-2 md:p-0 md:w-fit h-fit md:h-full fixed top-0 left-0">
       <FloatingDock items={links} />
     </div>
   );
